@@ -1,0 +1,13 @@
+g=fftshift(fft2(Cam1d));
+amp=log(abs(g)); 
+minv=min(amp);
+maxv=max(amp);
+ampthreshold=13;
+brightpixel=amp>ampthreshold;
+brightpixel(:,76:185)=0;
+g(brightpixel)=0;
+filter=ifft2(ifftshift(g));
+amp=log(abs(filter));
+maxv=max(max(amp)); 
+minv=min(min(amp));
+imshow(amp, [minv maxv]);
